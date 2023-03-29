@@ -30,8 +30,4 @@ public interface QuestionRepository extends JpaRepository<Question, Integer> {
             + "   or a.content like %:kw% "
             + "   or u2.username like %:kw% ")
     Page<Question> findAllByKeyword(@Param("kw") String kw, Pageable pageable);
-
-    @Modifying
-    @Query("update Question q set q.view = q.view + 1 where q.id = :id")
-    int updateView(Integer id);
 }

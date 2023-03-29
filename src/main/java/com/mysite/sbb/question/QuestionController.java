@@ -35,8 +35,7 @@ public class QuestionController {
 
     @GetMapping(value = "/detail/{id}")
     public String detail(Model model, @PathVariable("id") Integer id, AnswerForm answerForm) {
-        Question question = questionService.getQuestion(id);
-        question = questionService.updateView(id);
+        Question question = questionService.updateView(id);
         model.addAttribute("question", question);
         return "question_detail";
     }
