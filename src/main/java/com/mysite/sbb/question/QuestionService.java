@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -83,5 +84,12 @@ public class QuestionService {
     public void vote(Question question, SiteUser siteUser) {
         question.getVoter().add(siteUser);
         this.questionRepository.save(question);
+    }
+
+    @Transactional
+    public Question updateView(Integer id) {
+        Question question = getQuestion(id);
+        question.setView(question.getView() + 1);
+        return question;
     }
 }
